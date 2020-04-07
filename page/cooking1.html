@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/viewport.js"></script>
+</head>
+
+<body>
+<div class="main">
+    <div id="sectionC" class="sectionC">
+        <h2>Create New Taste Anywhere AnyTime</h2>
+        <p>Choose how many ingredients</p>
+        <p>you want to add...</p>
+        <input class="inputBox" max="3" min="1" placeholder="1" type="number">
+        <div class="button">START</div>
+    </div>
+</div>
+
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function () {
+            var num = 0;
+            $(".inputBox").on('blur',function(){
+               num = $(this).val();
+               if(num>3){
+                   $(".inputBox").val("");
+                   alert('max is 3')
+               }
+            })
+            $(".button").on("click",function () {
+                if(num){
+                    window.location='cooking2.html?num='+num;
+                }else{
+                    alert('Please input number!')
+                }
+
+            })
+        })
+    </script>
+</body>
+
+</html>

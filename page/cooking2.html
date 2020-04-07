@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <link rel="stylesheet" href="../css/common.css">
+    <html>
+
+    <script src="../js/viewport.js"></script>
+</head>
+
+<body>
+<div class="main">
+    <div id="sectionD" class="sectionD">
+        <div class="back">back</div>
+        <div class="topBox">
+            <!--<div><span>MILK</span><img src="../img/bread.png" alt=""></div>-->
+        </div>
+        <p> = image below</p>
+        <div class="imgBox">
+            <!--<img src="../img/avocado.png" alt="">-->
+        </div>
+    </div>
+</div>
+
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function () {
+            function getUrlParam(key) {
+                var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+                var result = window.location.search.substr(1).match(reg);
+                return result ? decodeURIComponent(result[2]) : null;
+            }
+            var num = getUrlParam("num");
+            var foodList = ['pizza','apple','tomato','hamburger','ham','cola','kiwi','noodles','milkTea','steak','grape','sushi ','chips','peach','watermelon','banana','cabbage','chicken','avocado','milk','biscuit','strawberry','iceCream','rice','onion','hotDog','popcorn','candy','orange','lenmon']
+            var foods = [];
+            while(foods.length < num){
+                var temp = (Math.random()*foodList.length) >> 0;
+                foods.push({value:foodList[temp],index:temp});
+            }
+            for(var i = 0;i<foods.length;i++){
+                var html = '';
+                var pic = '';
+                if(i<foods.length-1){
+                    html = html +'<div  class="breadAdd"><span>'+ foods[i].value+'</span><img src="../img/bread.png" alt=""></div>';
+                }else{
+                    html = html +'<div  class="breadAdd"><span>'+ foods[i].value+'</span></div>';
+                }
+                var picNum = Number(foods[i].index+1);
+                var rotate = Number(foods[i].index+20);
+                var height = Number(foods[i].index+100);
+                pic = pic +'<img style="position: absolute;left:'+foods[i].index+'px;top:'+foods[i].index+'px;opacity:'+foods[i].index/5+';transform:rotate('+rotate+'deg)" height="'+height+'%" src="../img/'+picNum+'.png" alt="">'
+                $('.topBox').append(html);
+                $('.imgBox').append(pic);
+            }
+
+            $(".back").on("click",function () {
+                window.location='cooking1.html';
+            })
+        })
+    </script>
+</body>
+
+</html>

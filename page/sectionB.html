@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/viewport.js"></script>
+</head>
+
+<body>
+    <div id="sectionB" class="sectionB">
+        <audio id="player" autoplay src="../img/coding.mp3"></audio>
+        <div id="barBox">
+            <div>
+                <span class="bar chocolateBar"></span>
+                <p style="display:none" id="text1">
+                    Special meal starts today...
+                </p>
+                <h3 id="text2"></h3>
+            </div>
+        </div>
+    </div>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function () {
+            var text1 = document.getElementById('text1'),
+                text2 = document.getElementById('text2'),
+                player = document.getElementById('player'),
+                i = 0,
+                typer = setInterval(function(){
+                    text2.innerHTML = text1.innerHTML.substring(0,i);
+                    player.play();
+                    i++;
+                    if(text2.innerHTML  == text1.innerHTML){
+                        clearInterval(typer);
+                        player.pause();
+                    };
+                },60);
+        })
+    </script>
+</body>
+
+</html>

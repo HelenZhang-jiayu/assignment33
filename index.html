@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/viewport.js"></script>
+</head>
+
+<body>
+<div class="main">
+    <div class="ribbon"></div>
+    <div class="newcase">NEW TASTE</div>
+    <div id="sectionA" class="sectionA">
+        <audio id="eatting" autoplay src="img/eat.mp3"></audio>
+        <h2 class="dark">Dark</h2>
+        <h2 class="genractor">generator</h2>
+        <h2 class="recipe">recipe</h2>
+        <h2 class="eat">eat the cheese to start</h2>
+        <img class="foods" src="img/apple.png" alt="">
+        <img class="foods" src="img/avocado2.png" alt="">
+        <img class="foods" src="img/bread1.png" alt="">
+        <img class="foods" src="img/bread3.png" alt="">
+        <img class="foods" src="img/milk2.png" alt="">
+        <img class="foods" src="img/apple.png" alt="">
+        <img class="foods" src="img/avocado2.png" alt="">
+        <img class="foods" src="img/bread1.png" alt="">
+        <img class="foods" src="img/bread3.png" alt="">
+        <div class="cheese">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+    <div id="sectionE"  class="sectionE none">
+        <div class="triangle arrow-up"></div>
+        <div class="triangle arrow-up"></div>
+        <div class="triangle arrow-up"></div>
+        <div class="triangle arrow-up"></div>
+        <div class="triangle arrow-up"></div>
+        <div class="triangle arrow-down"></div>
+        <div class="triangle arrow-down"></div>
+        <div class="triangle arrow-left"></div>
+        <div class="triangle arrow-left"></div>
+        <div class="triangle arrow-left"></div>
+        <div class="triangle arrow-left"></div>
+        <div class="triangle arrow-right"></div>
+        <div class="triangle arrow-right"></div>
+        <div class="triangle arrow-right"></div>
+        <div class="triangle arrow-right"></div>
+        <div class="button">START</div>
+    </div>
+    <div id="sectionB"  class="sectionB  none">
+        <div id="barBox">
+            <div>
+                <span class="bar chocolateBar"></span>
+                <p style="display:none" id="text1">
+                    Special meal starts today...
+                </p>
+                <h3 id="text2"></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+
+        $(function () {
+
+            // part2
+            var num = 0;
+            $(".inputBox").on('input',function(){
+                num = $(this).val();
+            })
+
+
+            var time = 0;
+            var r=''
+            var π=3.14
+            // var s=π*r^2;
+            var s = 0;
+            $('.cheese').on("click", function (event) {
+                    var e = getRelative(event);
+                    var x1 = e.x;
+                    var y1 = e.y;
+                    var dot = '';
+                    time++
+                    var r= 50*time;
+                    eatting = document.getElementById('eatting'),
+                    typer = setInterval(function(){
+                        eatting.play();
+                        clearInterval(typer);
+                    },10);
+                    var left = Number(x1-r/2);
+                    var top = Number(y1-r/2);
+                    dot=dot+"<div class='dot' style='width: "+r+"px;height:"+r+"px;left:"+left+"px;top:"+top+"px;'></div>"
+                    $(this).append(dot);
+                    if(time>13){
+                       $('.sectionA').addClass('none');
+                       $('.sectionE').removeClass('none');
+                    }
+                })
+            function getRelative(event){
+                var position = getAbosute(event);
+                var x = position.x;
+                var y = position.y;
+                var x1 = $(".cheese").offset().left;
+                var y1 = $(".cheese").offset().top;
+                var x2 = x - x1;
+                var y2 = y - y1;
+                return {x:x2,y:y2};
+            };
+                function getAbosute(event){
+                    if(event.pageX || event.pageY){
+                        return {x:event.pageX, y:event.pageY};
+                    }
+                    return{
+                        x:event.clientX + document.body.scrollLeft - document.body.clientLeft,
+                        y:event.clientY + document.body.scrollTop - document.body.clientTop
+                    };
+                }
+            $(".button").on("click",function () {
+                $('.sectionE').addClass('none');
+                $('.sectionB').removeClass('none');
+                $('.ribbon').addClass('none');
+                $('.newcase').addClass('none');
+                var voice = '<audio id="player" src="img/coding.mp3"></audio>';
+                $('#sectionB').append(voice);
+                var text1 = document.getElementById('text1'),
+                    text2 = document.getElementById('text2'),
+                    player = document.getElementById('player'),
+                    i = 0,
+                    typer = setInterval(function(){
+                        text2.innerHTML = text1.innerHTML.substring(0,i);
+                        player.play();
+                        i++;
+                        if(text2.innerHTML  == text1.innerHTML){
+                            clearInterval(typer);
+                            player.pause();
+                            window.location='page/cooking1.html';
+                        };
+                    },60);
+            })
+
+        })
+    </script>
+</body>
+
+</html>
